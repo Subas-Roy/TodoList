@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Completed Tasks - To-Do List{% endblock %}
+
+{% block content %}
+
+    <div style="background-color: rgb(142, 53, 214);" class="mt-5 rounded w-75 m-auto">
+        <h1 class="text-center text-white p-1 mb-4">Completed Tasks</h1>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in completed_tasks %}
+            <tr>
+                <td>{{ task.taskTitle }}</td>
+                <td>{{ task.taskDescription }}</td>
+                <td>
+                    {% if task.is_completed == True %}
+                    Completed
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock content %}

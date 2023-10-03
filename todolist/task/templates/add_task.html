@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Add Task - To-Do List{% endblock %}
+
+{% block content %}
+
+<div style="background-color: rgb(142, 53, 214);" class="mt-5 rounded w-75 m-auto">
+    <h1 class="text-center text-white p-1 mb-4">Add Task</h1>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-primary" value="Submit">
+</form>
+
+{% endblock content %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Tasks - To-Do List{% endblock %}
+
+{% block content %} 
+    <div style="background-color: rgb(142, 53, 214);" class="mt-5 rounded w-75 m-auto">
+        <h1 class="text-center text-white p-1 mb-4">Tasks</h1>
+    </div>
+        
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            {% if not task.is_completed %}
+            <tr>
+                <td>{{ task.taskTitle }}</td>
+                <td>{{ task.taskDescription }}</td>
+                <td>
+                    {% if task.is_completed == False %}
+                    Incomplete
+                    {% endif %}
+                </td>
+                <td>
+                    <form class="d-inline" method="post" action="{% url 'delete_task' task.id %}">
+                        {% csrf_token %}
+                        <input class="btn btn-danger btn-sm" type="submit" value="Delete">
+                    </form>
+                    <a class="btn btn-primary btn-sm" href="{% url 'edit_task' task.id %}">Edit</a>
+                    <form class="d-inline" method="post" action="{% url 'complete_task' task.id %}">
+                        {% csrf_token %}
+                        <input class="btn btn-success btn-sm" type="submit" value="Complete">
+                    </form>
+                </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
